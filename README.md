@@ -1,6 +1,8 @@
-## PyWave
+![PyWave](pywave.jpg "PyWave banner")
 
-Three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, or an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/). They all require [pyaudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
+## Overview
+
+This repository contains three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, or an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/). They all require [pyaudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
 
 * multi_synth.py: polyphonic additive synthesizer with 8-note polyphony by default
 * multi_wave.py: polyphonic wavetable synthesizer with 12-note polyphony by default
@@ -23,4 +25,8 @@ If you hear crackling audio from these scripts, you might want to
 * quit other applications, especially web browsers.
 * increase audio buffer size (<tt>BSIZE</tt>) in the scripts or reduce maximum polyphony (<tt>MAXPOLY</tt>).
 * make sure you are running a recent Python version, because Python performance tends to improve with each release.
+
+### Credits
+
+* [2010_mavericks_competition.jpg](https://commons.wikimedia.org/wiki/File:2010_mavericks_competition_edit1.jpg): photo by Shalom Jacobovitz; derivative work: Brocken Inaglory, CC BY-SA 2.0 <https://creativecommons.org/licenses/by-sa/2.0>, via Wikimedia Commons
 
