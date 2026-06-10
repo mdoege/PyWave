@@ -66,7 +66,6 @@ class ShowKeys:
                 s.running = False
             if event.type == pygame.VIDEORESIZE:
                 s.res = event.w, event.h
-                # print(s.res)
                 s.screen = pygame.display.set_mode(s.res, pygame.RESIZABLE)
 
     def run(s):
@@ -90,7 +89,6 @@ class ShowKeys:
         for msg in inport.iter_pending():
             # ignore percussion channel
             if msg.type == "note_on" and msg.channel != 9:
-                # print(s.note.note, s.note.time)
                 s.on[msg.note] = 1
             if msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0):
                 s.on[msg.note] = 0
