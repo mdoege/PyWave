@@ -56,7 +56,10 @@ class ShowKeys:
         pygame.display.set_caption("MIDI keyboard")
         s.screen.fill(WHITE)
         s.clock = pygame.time.Clock()
+        # lights for internal MIDI notes
         s.on = 200 * [0]
+        # lights for external MIDI notes
+        s.ext = 200 * [0]
         s.mouse = False
 
     def events(s):
@@ -89,12 +92,13 @@ class ShowKeys:
             return False
 
     def update(s):
+        # process MIDI events from other sources
         for msg in inport.iter_pending():
             # ignore percussion channel
             if msg.type == "note_on" and msg.channel != 9:
-                s.on[msg.note] = 1
+                s.ext[msg.note] = 1
             if msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0):
-                s.on[msg.note] = 0
+                s.ext[msg.note] = 0
 
         s.screen.fill(BLACK)
 
@@ -110,7 +114,7 @@ class ShowKeys:
             x = kw * (p[0] + 7 * oc + 0.5)
             if p[1] == 0:
                 pygame.draw.rect(s.screen, GRAY, [x - ww // 2, 0, ww, s.res[1]])
-                if s.on[i]:
+                if s.on[i] or s.ext[i]:
                     pygame.draw.rect(
                         s.screen, RED, [x - ww // 2, s.res[1] - YP, ww, YP]
                     )
@@ -122,7 +126,7 @@ class ShowKeys:
             x = kw * (p[0] + 7 * oc + 0.5)
             if p[1]:
                 pygame.draw.rect(s.screen, BLACK, [x - wb // 2, 0, wb, 0.63 * s.res[1]])
-                if s.on[i]:
+                if s.on[i] or s.ext[i]:
                     pygame.draw.rect(
                         s.screen, RED, [x - wb // 2, 0.63 * s.res[1] - YP, wb, YP]
                     )
