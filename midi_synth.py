@@ -18,7 +18,7 @@ ARATE = 44100
 
 ################################################################################
 
-last_note = 0
+last_note = -1
 xpos = 0
 freq = 0
 amp = 0
@@ -70,7 +70,7 @@ while True:
         if msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0):
             if msg.note == last_note:
                 freq = 0
-                last_note = 0
+                last_note = -1
     try:
         time.sleep(SLEEP)
     except:
