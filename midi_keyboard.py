@@ -5,7 +5,7 @@
 import pygame
 import mido
 
-# default window size
+# window size
 SIZE = 1800, 300
 
 # MIDI note velocity
@@ -47,12 +47,15 @@ kp = (
     (6, 0),
 )
 
+kw = SIZE[0] // WKEYS
+ww = kw - 4
+wb = int(0.6 * kw) - 4
+YP = SIZE[1] // 7
 
 class ShowKeys:
     def __init__(s):
         pygame.init()
-        s.res = SIZE
-        s.screen = pygame.display.set_mode(s.res, pygame.RESIZABLE)
+        s.screen = pygame.display.set_mode(SIZE)
         pygame.display.set_caption("MIDI keyboard")
         s.screen.fill(WHITE)
         s.clock = pygame.time.Clock()
@@ -61,6 +64,8 @@ class ShowKeys:
         # lights for external MIDI notes
         s.ext = 200 * [0]
         s.mouse = False
+        s.back = pygame.Surface(SIZE)
+        s.background()
 
     def events(s):
         for event in pygame.event.get():
@@ -70,9 +75,6 @@ class ShowKeys:
                 s.mouse = False
             if event.type == pygame.QUIT:
                 s.running = False
-            if event.type == pygame.VIDEORESIZE:
-                s.res = event.w, event.h
-                s.screen = pygame.display.set_mode(s.res, pygame.RESIZABLE)
 
     def run(s):
         s.running = True
@@ -91,6 +93,25 @@ class ShowKeys:
         else:
             return False
 
+    def background(s):
+        s.back.fill(BLACK)
+
+        # draw white keys
+        for i in range(MIN_NOTE, MAX_NOTE):
+            p = kp[i % 12]
+            oc = i // 12 - LEFT_OCT
+            x = kw * (p[0] + 7 * oc + 0.5)
+            if p[1] == 0:
+                pygame.draw.rect(s.back, GRAY, [x - ww // 2, 0, ww, SIZE[1]])
+
+        # draw black keys
+        for i in range(MIN_NOTE, MAX_NOTE):
+            p = kp[i % 12]
+            oc = i // 12 - LEFT_OCT
+            x = kw * (p[0] + 7 * oc + 0.5)
+            if p[1]:
+                pygame.draw.rect(s.back, BLACK, [x - wb // 2, 0, wb, 0.63 * SIZE[1]])
+
     def update(s):
         # process MIDI events from other sources
         for msg in inport.iter_pending():
@@ -100,12 +121,7 @@ class ShowKeys:
             if msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0):
                 s.ext[msg.note] = 0
 
-        s.screen.fill(BLACK)
-
-        kw = s.res[0] // WKEYS
-        ww = kw - 4
-        wb = int(0.6 * kw) - 4
-        YP = s.res[1] // 7
+        s.screen.blit(s.back, (0, 0))
 
         # draw white keys
         for i in range(MIN_NOTE, MAX_NOTE):
@@ -113,10 +129,9 @@ class ShowKeys:
             oc = i // 12 - LEFT_OCT
             x = kw * (p[0] + 7 * oc + 0.5)
             if p[1] == 0:
-                pygame.draw.rect(s.screen, GRAY, [x - ww // 2, 0, ww, s.res[1]])
                 if s.on[i] or s.ext[i]:
                     pygame.draw.rect(
-                        s.screen, RED, [x - ww // 2, s.res[1] - YP, ww, YP]
+                        s.screen, RED, [x - ww // 2, SIZE[1] - YP, ww, YP]
                     )
 
         # draw black keys
@@ -125,10 +140,9 @@ class ShowKeys:
             oc = i // 12 - LEFT_OCT
             x = kw * (p[0] + 7 * oc + 0.5)
             if p[1]:
-                pygame.draw.rect(s.screen, BLACK, [x - wb // 2, 0, wb, 0.63 * s.res[1]])
                 if s.on[i] or s.ext[i]:
                     pygame.draw.rect(
-                        s.screen, RED, [x - wb // 2, 0.63 * s.res[1] - YP, wb, YP]
+                        s.screen, RED, [x - wb // 2, 0.63 * SIZE[1] - YP, wb, YP]
                     )
 
         mx, my = pygame.mouse.get_pos()
@@ -140,7 +154,7 @@ class ShowKeys:
             oc = i // 12 - LEFT_OCT
             x = kw * (p[0] + 7 * oc + 0.5)
             if p[1]:
-                if s.test_key(mx, my, [x - wb // 2, 0, wb, 0.63 * s.res[1]]):
+                if s.test_key(mx, my, [x - wb // 2, 0, wb, 0.63 * SIZE[1]]):
                     if s.on[i] == 0:
                         msg = mido.Message("note_on", note=i, velocity=VELOCITY)
                         outport.send(msg)
@@ -158,7 +172,7 @@ class ShowKeys:
             oc = i // 12 - LEFT_OCT
             x = kw * (p[0] + 7 * oc + 0.5)
             if p[1] == 0:
-                if s.test_key(mx, my, [x - ww // 2, 0, ww, s.res[1]]) and not on_black:
+                if s.test_key(mx, my, [x - ww // 2, 0, ww, SIZE[1]]) and not on_black:
                     if s.on[i] == 0:
                         msg = mido.Message("note_on", note=i, velocity=VELOCITY)
                         outport.send(msg)
