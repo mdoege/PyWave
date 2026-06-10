@@ -10,6 +10,8 @@ This repository contains three Python MIDI synthesizers which can be played in r
 
 The helper script midi_play.py can be used to play back a MIDI file to these synthesizers.
 
+There is also midi_keyboard.py, an on-screen MIDI keyboard (needs PyGame) which can be used to play the synths.
+
 Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine waves like PySynth A and an exponential decay like PySynth B, so they sound very similar to PySynth A and B. Multi_wave.py on the other hand loads a wavetable with a guitar-like sound by default.
 
 ### Wavetables
