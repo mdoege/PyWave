@@ -10,11 +10,13 @@ They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for au
 * multi_wave.py: polyphonic wavetable synthesizer with 12-note polyphony by default
 * midi_synth.py: simple monophonic additive synthesizer
 
-The helper script midi_play.py can be used to play back a MIDI file to these synthesizers.
-
-There is also midi_keyboard.py, an on-screen MIDI keyboard (needs PyGame) which can be used to play the synths or to show incoming MIDI notes from other sources.
-
 Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine waves like PySynth A and an exponential decay like PySynth B, so they sound very similar to PySynth A and B. Multi_wave.py on the other hand loads a wavetable with a guitar-like sound by default.
+
+### Helper scripts
+
+* midi_play.py: can be used to play back a MIDI file to these synthesizers
+* midi_keyboard.py: an on-screen MIDI keyboard (needs PyGame) which can be used to play the synths or to show incoming MIDI notes from other sources
+* studio.py: a simple MIDI recording studio. By default, MIDI program 0 is where you play and where all notes are recorded and program 1 is for control mode. Playing a C in control mode shows info, playing D replays all notes in memory, and playing E saves as a MIDI file to the current directory.
 
 ### Wavetables
 
