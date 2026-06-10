@@ -2,7 +2,9 @@
 
 ## Overview
 
-This repository contains three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, or an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/). They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
+This repository contains three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/) or the included midi_keyboard.py.
+
+They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
 
 * multi_synth.py: polyphonic additive synthesizer with 8-note polyphony by default
 * multi_wave.py: polyphonic wavetable synthesizer with 12-note polyphony by default
@@ -10,7 +12,7 @@ This repository contains three Python MIDI synthesizers which can be played in r
 
 The helper script midi_play.py can be used to play back a MIDI file to these synthesizers.
 
-There is also midi_keyboard.py, an on-screen MIDI keyboard (needs PyGame) which can be used to play the synths.
+There is also midi_keyboard.py, an on-screen MIDI keyboard (needs PyGame) which can be used to play the synths or to show incoming MIDI notes from other sources.
 
 Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine waves like PySynth A and an exponential decay like PySynth B, so they sound very similar to PySynth A and B. Multi_wave.py on the other hand loads a wavetable with a guitar-like sound by default.
 
