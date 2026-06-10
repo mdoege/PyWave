@@ -5,6 +5,9 @@
 import pygame
 import mido
 
+# default window size
+SIZE = 1800, 300
+
 # MIDI note velocity
 VELOCITY = 80
 
@@ -48,7 +51,7 @@ kp = (
 class ShowKeys:
     def __init__(s):
         pygame.init()
-        s.res = 1800, 300  # default window size
+        s.res = SIZE
         s.screen = pygame.display.set_mode(s.res, pygame.RESIZABLE)
         pygame.display.set_caption("MIDI keyboard")
         s.screen.fill(WHITE)
