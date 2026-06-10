@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, or an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/). They all require [pyaudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
+This repository contains three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, or an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/). They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
 
 * multi_synth.py: polyphonic additive synthesizer with 8-note polyphony by default
 * multi_wave.py: polyphonic wavetable synthesizer with 12-note polyphony by default
