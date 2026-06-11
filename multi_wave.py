@@ -10,7 +10,7 @@ import sys, struct, math, time, wave
 SLEEP = 0.01
 
 # audio buffer size (determines latency)
-#      Increase this to e.g. 256 or 512 if there is crackling audio output.
+#      Increase this if there is crackling audio output.
 BSIZE = 256
 
 # sample rate

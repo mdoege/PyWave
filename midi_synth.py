@@ -10,8 +10,8 @@ import struct, math, time
 SLEEP = 0.01
 
 # audio buffer size (determines latency)
-#      Increase this to e.g. 256 or 512 if there is crackling audio output.
-BSIZE = 128
+#      Increase this if there is crackling audio output.
+BSIZE = 256
 
 # sample rate
 ARATE = 44100
