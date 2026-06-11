@@ -9,7 +9,7 @@ They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for au
 * multi_synth.py: polyphonic additive synthesizer with 8-note polyphony by default
 * multi_wave.py: polyphonic wavetable synthesizer with 12-note polyphony by default
 * midi_synth.py: simple monophonic additive synthesizer
-* epiano.py: Yamaha DX-7 FM e-piano patch (code ported from PySynth E; based on multi_synth.py)
+* epiano.py: DX7 FM e-piano patch (code ported from PySynth E; based on multi_synth.py)
 
 Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine waves like PySynth A and an exponential decay like PySynth B, so they sound very similar to PySynth A and B. Multi_wave.py on the other hand loads a wavetable with a guitar-like sound by default.
 
