@@ -2,13 +2,14 @@
 
 ## Overview
 
-This repository contains three Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/) or the included midi_keyboard.py.
+This repository contains Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/) or the included midi_keyboard.py.
 
 They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
 
 * multi_synth.py: polyphonic additive synthesizer with 8-note polyphony by default
 * multi_wave.py: polyphonic wavetable synthesizer with 12-note polyphony by default
 * midi_synth.py: simple monophonic additive synthesizer
+* epiano.py: Yamaha DX-7 FM e-piano patch (code ported from PySynth E; based on multi_synth.py)
 
 Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine waves like PySynth A and an exponential decay like PySynth B, so they sound very similar to PySynth A and B. Multi_wave.py on the other hand loads a wavetable with a guitar-like sound by default.
 
