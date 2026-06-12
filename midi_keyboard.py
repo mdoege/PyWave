@@ -2,6 +2,10 @@
 
 # On-screen MIDI keyboard using PyGame and mido
 
+import os
+# let focus mouse clicks through to application
+os.environ["SDL_MOUSE_FOCUS_CLICKTHROUGH"] = "1"
+
 import pygame
 import mido
 
