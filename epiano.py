@@ -4,8 +4,8 @@
 
 import pyaudio
 import mido
-import struct, math, time
-from math import pi, sin
+import struct, time
+from math import pi, sin, log
 
 # sleep time in main loop
 SLEEP = 0.01
@@ -85,7 +85,7 @@ while True:
 
                 # get amplitude loss factor per sample
                 #   (higher frequencies decay more quickly)
-                a_min, a_max, a_sel = math.log(21), math.log(108), math.log(msg.note)
+                a_min, a_max, a_sel = log(21), log(108), log(msg.note)
                 lossfac = 50000 - 49000 * ((a_sel - a_min) / (a_max - a_min))
                 lossfac *= ARATE / 44100
                 amp_loss = 1 - 1 / lossfac
