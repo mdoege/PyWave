@@ -18,6 +18,7 @@ Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine wa
 * midi_play.py: play a MIDI file; can be used to play back a MIDI file to these synthesizers
 * midi_play_slow.py: play a MIDI file slowly
 * midi_keyboard.py: an on-screen MIDI keyboard (needs PyGame) which can be used to play the synths or to show incoming MIDI notes from other sources
+* falling_notes.py: piano trainer with falling MIDI notes (needs PyGame). Press Space to pause, press F or S to go faster/slower.
 * studio.py: a simple MIDI recording studio. By default, MIDI program 0 is where you play and where all notes are recorded and program 1 is for control mode. Playing a C in control mode shows info, playing D replays all notes in memory, and playing E saves as a MIDI file to the current directory.
 
 ### Wavetables
