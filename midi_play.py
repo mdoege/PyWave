@@ -12,7 +12,7 @@
 # by my MIDI synthesizers anyway.
 
 import mido
-import sys, os.path
+import sys
 
 # transposition (halftones)
 TRANSPOSE = 0
@@ -20,7 +20,7 @@ TRANSPOSE = 0
 try:
     fn = sys.argv[1]
 except:
-    fn = os.path.join("docs", "italian.mid")
+    fn = "midi/wtk1-prelude1.mid"
 
 out = mido.open_output()
 
