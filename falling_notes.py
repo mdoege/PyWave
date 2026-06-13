@@ -5,7 +5,7 @@
 # Press Space to pause
 # Press F or S to go faster/slower
 
-import os
+import os, sys
 # let focus mouse clicks through to application
 os.environ["SDL_MOUSE_FOCUS_CLICKTHROUGH"] = "1"
 
