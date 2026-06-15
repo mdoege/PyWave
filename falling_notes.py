@@ -62,9 +62,10 @@ MIN_NOTE, MAX_NOTE, WKEYS, LEFT_OCT = 36, 85, 29, 3
 WHITE = 255, 255, 255
 BLACK = 0, 0, 0
 GRAY = 150, 150, 140
-BLUE = 0, 0, 255
+DARK = 20, 20, 20
 RED = 255, 0, 0
 
+# key horizontal position and type (0 = white, 1 = black)
 kp = (
     (0, 0),
     (0.45, 1),
@@ -192,14 +193,14 @@ class ShowKeys:
 
     def draw_notes(s):
         s.fall.scroll(dy = 1)
-        pygame.draw.line(s.fall, (20, 20, 20), (0, 0), (SIZE[0], 0))
+        pygame.draw.line(s.fall, DARK, (0, 0), (SIZE[0], 0))
         for i in range(MIN_NOTE, MAX_NOTE):
             if len(notelist[i]) == 0:
                 continue
             for start, end in notelist[i]:
                 if start <= s.cur_time <= end - END_GAP:
                     pos, w = pianopos[i]
-                    pygame.draw.line(s.fall, (255, 0, 0), (pos, 0), (pos + w, 0))
+                    pygame.draw.line(s.fall, RED, (pos, 0), (pos + w, 0))
 
     def update(s):
         # process MIDI events from other sources
