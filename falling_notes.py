@@ -2,11 +2,13 @@
 
 # Piano trainer with falling MIDI notes and optional transposition
 
+# Can also play the file via MIDI when the "play" commandline parameter is used.
+
 # Press Space to pause
 # Press F or S to go faster/slower
 
 # Usage:
-# python falling_notes.py midi_file [transposition]
+# python falling_notes.py midi_file [transposition] ["play"]
 
 import os, sys
 # let focus mouse clicks through to application
@@ -22,6 +24,13 @@ except:
 
 # piano size
 SIZE = 1800, 300
+
+# play notes via MIDI? third commandline argument
+if len(sys.argv) > 3 and sys.argv[3] == "play":
+    PLAY_FILE = True
+    print("*** playing file via MIDI ***")
+else:
+    PLAY_FILE = False
 
 # transposition (halftones); second commandline argument
 try:
@@ -87,14 +96,17 @@ start = 200 * [0]
 cur_time = 0
 allow = "note_on", "note_off"
 notelist = [[] for i in range(200)]
+playlist = []
 
 for msg in mido.MidiFile(fn):
     cur_time += msg.time
     if msg.type in allow:
         if msg.type == "note_on" and msg.velocity > 0:
             start[msg.note + TRANSPOSE] = cur_time
+            playlist.append((cur_time, msg))
         if msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0):
             notelist[msg.note + TRANSPOSE].append((start[msg.note + TRANSPOSE], cur_time))
+            playlist.append((cur_time, msg))
 
 # create table of piano key positions
 
@@ -278,6 +290,10 @@ class ShowKeys:
             s.draw_notes()
             s.screen.blit(s.fall, (0, 0))
             s.cur_time += s.speed
+            if PLAY_FILE and len(playlist) > 0 and s.cur_time >= playlist[0][0] + F_HEIGHT / FPS:
+                t, msg = playlist.pop(0)
+                msg.note += TRANSPOSE
+                outport.send(msg)
 
         pygame.display.set_caption("Falling Notes (speed: %.3fx)" % (s.speed / SPEED))
         pygame.display.flip()
