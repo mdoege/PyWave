@@ -10,10 +10,10 @@ There are also various other MIDI-related scripts here, some of them requiring [
 
 They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for audio output) and [mido](https://github.com/mido/mido) (for MIDI event handling):
 
-* multi_synth.py: 8-note polyphonic additive synthesizer
-* multi_wave.py: 12-note polyphonic wavetable synthesizer
-* epiano.py: 8-note polyphonic DX7 FM e-piano synthesizer (ported from PySynth E; code based on multi_synth.py)
-* midi_synth.py: simple monophonic additive synthesizer
+* multi_synth.py: 8-note polyphonic **additive** synthesizer
+* multi_wave.py: 12-note polyphonic **wavetable** synthesizer
+* epiano.py: 8-note polyphonic DX7 **FM** e-piano synthesizer (ported from PySynth E; code based on multi_synth.py)
+* midi_synth.py: simple monophonic **additive** synthesizer
 
 Polyphony and volume settings can be changed in the scripts if desired.
 
