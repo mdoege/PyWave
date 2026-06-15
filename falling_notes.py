@@ -5,6 +5,9 @@
 # Press Space to pause
 # Press F or S to go faster/slower
 
+# Usage:
+# python falling_notes.py midi_file [transposition]
+
 import os, sys
 # let focus mouse clicks through to application
 os.environ["SDL_MOUSE_FOCUS_CLICKTHROUGH"] = "1"
@@ -20,8 +23,12 @@ except:
 # piano size
 SIZE = 1800, 300
 
-# transposition (halftones)
-TRANSPOSE = 0
+# transposition (halftones); second commandline argument
+try:
+    TRANSPOSE = int(sys.argv[2])
+    print("*** transposing by %i halftones ***" % TRANSPOSE)
+except:
+    TRANSPOSE = 0
 
 # MIDI note velocity
 VELOCITY = 80
