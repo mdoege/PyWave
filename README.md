@@ -15,7 +15,7 @@ They all require [PyAudio](https://people.csail.mit.edu/hubert/pyaudio/) (for au
 * epiano.py: 8-note polyphonic DX7 **FM** e-piano synthesizer (ported from PySynth E; code based on multi_synth.py)
 * midi_synth.py: simple monophonic **additive** synthesizer
 
-Polyphony and volume settings can be changed in the scripts if desired.
+Default polyphony settings are fairly low to make sure the synths can run on older hardware, but can be changed in the scripts if desired.
 
 Multi_synth.py and midi_synth.py produce a piano-like timbre using three sine waves like PySynth A and an exponential decay like PySynth B, so they sound very similar to PySynth A and B. Multi_wave.py on the other hand loads a wavetable with a guitar-like sound by default.
 
