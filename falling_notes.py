@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Piano trainer with falling MIDI notes
+# Piano trainer with falling MIDI notes and optional transposition
 
 # Press Space to pause
 # Press F or S to go faster/slower
@@ -19,6 +19,9 @@ except:
 
 # piano size
 SIZE = 1800, 300
+
+# transposition (halftones)
+TRANSPOSE = 0
 
 # MIDI note velocity
 VELOCITY = 80
@@ -81,9 +84,9 @@ for msg in mido.MidiFile(fn):
     cur_time += msg.time
     if msg.type in allow:
         if msg.type == "note_on" and msg.velocity > 0:
-            start[msg.note] = cur_time
+            start[msg.note + TRANSPOSE] = cur_time
         if msg.type == "note_off" or (msg.type == "note_on" and msg.velocity == 0):
-            notelist[msg.note].append((start[msg.note], cur_time))
+            notelist[msg.note + TRANSPOSE].append((start[msg.note + TRANSPOSE], cur_time))
 
 # create table of piano key positions
 
