@@ -24,3 +24,4 @@ def name(x):
 
 
 print(name(low), "to", name(high))
+print("%.2f octaves" % ((high - low) / 12))
