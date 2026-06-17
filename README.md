@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/) or the included midi_keyboard.py.
+This repository contains Python MIDI synthesizers which can be played in real-time, e.g. from a USB MIDI keyboard, a MIDI file, an on-screen MIDI keyboard such as [VMPK](https://vmpk.sourceforge.io/) or the included midi_keyboard.py. Audio demos are available at the [PySynth homepage](https://mdoege.github.io/PySynth/index.html#pywave).
 
 There are also various other MIDI-related scripts here, some of them requiring [PyGame](https://www.pygame.org/).
 
