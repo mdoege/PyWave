@@ -16,7 +16,7 @@ BSIZE = 256
 # sample rate
 ARATE = 44100
 
-# maximum polyphony
+# maximum polyphony (= number of oscillators)
 MAXPOLY = 12
 
 # fade in and out parameters
