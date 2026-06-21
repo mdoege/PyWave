@@ -24,6 +24,12 @@ FADE_NORMAL = 0.9999
 FADE_PAD = 0.99995
 FADEIN_PAD = 30000
 
+# unison (chorus) parameters
+# Set UNISON to an odd number like 3 or 5 or set it to 1 to disable unison.
+# Note that enabling unison will reduce maximum polyphony.
+UNISON = 3
+UNISON_DETUNE = 20
+
 ################################################################################
 
 # read wavetable file
@@ -183,9 +189,21 @@ while True:
                 wav_inc *= num_wave - 1
                 # normal sounds start at full amplitude; pad sounds at low amplitude
                 if not is_pad:
-                    notes.append([0, freq, 1, 1, msg.note, 0, wav_inc])
+                    if UNISON < 2:
+                        notes.append([0, freq, 1, 1, msg.note, 0, wav_inc])
+                    else:
+                        d_cent = 2 * UNISON_DETUNE / (UNISON - 1)
+                        for i in range(- (UNISON // 2), UNISON // 2):
+                            f = freq * 2 ** (i * d_cent / 1200)
+                            notes.append([0, f, 1, 1, msg.note, 0, wav_inc])
                 else:
-                    notes.append([0, freq, 0.01, 1, msg.note, 0, wav_inc])
+                    if UNISON < 2:
+                        notes.append([0, freq, 0.01, 1, msg.note, 0, wav_inc])
+                    else:
+                        d_cent = 2 * UNISON_DETUNE / (UNISON - 1)
+                        for i in range(- (UNISON // 2), UNISON // 2):
+                            f = freq * 2 ** (i * d_cent / 1200)
+                            notes.append([0, f, 0.01, 1, msg.note, 0, wav_inc])
 
                 # remove notes that have gone almost silent
                 newnotes = []
