@@ -192,17 +192,15 @@ while True:
                     if UNISON < 2:
                         notes.append([0, freq, 1, 1, msg.note, 0, wav_inc])
                     else:
-                        d_cent = 2 * UNISON_DETUNE / (UNISON - 1)
                         for i in range(- (UNISON // 2), UNISON // 2):
-                            f = freq * 2 ** (i * d_cent / 1200)
+                            f = freq * 2 ** (i * UNISON_DETUNE / 1200)
                             notes.append([0, f, 1, 1, msg.note, 0, wav_inc])
                 else:
                     if UNISON < 2:
                         notes.append([0, freq, 0.01, 1, msg.note, 0, wav_inc])
                     else:
-                        d_cent = 2 * UNISON_DETUNE / (UNISON - 1)
                         for i in range(- (UNISON // 2), UNISON // 2):
-                            f = freq * 2 ** (i * d_cent / 1200)
+                            f = freq * 2 ** (i * UNISON_DETUNE / 1200)
                             notes.append([0, f, 0.01, 1, msg.note, 0, wav_inc])
 
                 # remove notes that have gone almost silent
