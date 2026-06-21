@@ -189,19 +189,13 @@ while True:
                 wav_inc *= num_wave - 1
                 # normal sounds start at full amplitude; pad sounds at low amplitude
                 if not is_pad:
-                    if UNISON < 2:
-                        notes.append([0, freq, 1, 1, msg.note, 0, wav_inc])
-                    else:
-                        for i in range(- (UNISON // 2), UNISON // 2):
-                            f = freq * 2 ** (i * UNISON_DETUNE / 1200)
-                            notes.append([0, f, 1, 1, msg.note, 0, wav_inc])
+                    for i in range(- (UNISON // 2), UNISON // 2 + 1):
+                        f = freq * 2 ** (i * UNISON_DETUNE / 1200)
+                        notes.append([0, f, 1, 1, msg.note, 0, wav_inc])
                 else:
-                    if UNISON < 2:
-                        notes.append([0, freq, 0.01, 1, msg.note, 0, wav_inc])
-                    else:
-                        for i in range(- (UNISON // 2), UNISON // 2):
-                            f = freq * 2 ** (i * UNISON_DETUNE / 1200)
-                            notes.append([0, f, 0.01, 1, msg.note, 0, wav_inc])
+                    for i in range(- (UNISON // 2), UNISON // 2 + 1):
+                        f = freq * 2 ** (i * UNISON_DETUNE / 1200)
+                        notes.append([0, f, 0.01, 1, msg.note, 0, wav_inc])
 
                 # remove notes that have gone almost silent
                 newnotes = []
