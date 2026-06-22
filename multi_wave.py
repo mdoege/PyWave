@@ -27,7 +27,7 @@ FADEIN_PAD = 30000
 # unison (chorus) parameters
 # Set UNISON to an odd number like 3 or 5 or set it to 1 to disable unison.
 # Note that enabling unison will reduce maximum polyphony.
-UNISON = 3
+UNISON = 1
 UNISON_DETUNE = 20
 
 ################################################################################
