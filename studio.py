@@ -11,9 +11,11 @@ except:
     NORMAL = 0
 CONTROL = NORMAL + 1  # patch for control codes
 
-# print(mido.get_input_names())
+inp = mido.get_input_names()[-1]
 
-port = mido.open_input()
+print("*** using device %s for MIDI input" % inp)
+
+port = mido.open_input(inp)
 out = mido.open_output()
 
 buf = []
