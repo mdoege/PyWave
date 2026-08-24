@@ -20,9 +20,12 @@ ARATE = 44100
 MAXPOLY = 8
 
 # volume
-VOLUME = 1000
+VOLUME = 1500
 
-# sustain notes?
+# use MIDI velocity for amplitude scaling?
+USE_VEL = True
+
+# sustain notes (i.e., ignore note_off events)?
 SUSTAIN = False
 
 ################################################################################
@@ -90,6 +93,12 @@ while True:
                 lossfac *= ARATE / 44100
                 amp_loss = 1 - 1 / lossfac
 
+                # add optional MIDI velocity-based amplitude scaling
+                if USE_VEL:
+                    ini_amp = (msg.velocity / 127) ** (1 / 3)
+                else:
+                    ini_amp = 1
+
                 # append new note to list of active notes
                 #   note data:
                 #   0  * unused
@@ -105,15 +114,15 @@ while True:
                     [
                         0,
                         freq,
-                        1,
+                        ini_amp,
                         amp_loss,
                         msg.note,
                         2.0 * pi / (ARATE / freq),
                         0,
                         0,
-                        1,
-                        1,
-                        1,
+                        ini_amp,
+                        ini_amp,
+                        ini_amp,
                     ]
                 )
 
