@@ -4,7 +4,7 @@
 
 import pyaudio
 import mido
-import struct, time
+import sys, struct, time
 from math import pi, sin, log
 
 # sleep time in main loop
@@ -21,6 +21,14 @@ MAXPOLY = 8
 
 # volume
 VOLUME = 1500
+
+# active MIDI channel (0 to 15), or -1 to listen on all channels
+CHAN = -1
+# The MIDI channel can also be set via an integer commandline argument:
+if len(sys.argv) > 1:
+    CHAN = int(sys.argv[1])
+if CHAN > -1:
+    print("*** using MIDI channel", CHAN)
 
 # use MIDI velocity for amplitude scaling?
 USE_VEL = True
@@ -74,6 +82,11 @@ stream = paud.open(
 
 while True:
     for msg in inport.iter_pending():
+        # check if note belongs to correct MIDI channel
+        if CHAN > -1:
+            if msg.channel != CHAN:
+                continue
+
         # process new note
         if msg.type == "note_on":
             if msg.velocity == 0:
