@@ -2,6 +2,8 @@
 
 # Polyphonic Python wavetable MIDI synthesizer
 
+# python multi_wave.py [patch number] [MIDI channel 0-15]
+
 import pyaudio
 import mido
 import sys, struct, math, time, wave
@@ -60,12 +62,19 @@ presets = [
     ("DECtalk", "wavetables/speech.wav", 128, 0.5),
 ]
 
-# print and select presets based on commandline argument
+# print and select presets based on first commandline argument
 
 try:
     sel_pres = int(sys.argv[1])
 except:
     sel_pres = 0
+
+# second commandline argument = MIDI channel
+
+try:
+    midi_channel = int(sys.argv[2])
+except:
+    midi_channel = -1
 
 print(80 * "=")
 print("Available presets (select with preset number as commandline argument):")
@@ -153,6 +162,11 @@ stream = paud.open(
 
 while True:
     for msg in inport.iter_pending():
+        # check if note belongs to correct MIDI channel
+        if midi_channel > -1:
+            if msg.channel != midi_channel:
+                continue
+
         # process new note
         if msg.type == "note_on":
             if msg.velocity == 0:
