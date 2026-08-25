@@ -2,6 +2,8 @@
 
 # Polyphonic Python MIDI synthesizer
 
+# python epiano.py [MIDI channel 0-15]
+
 import pyaudio
 import mido
 import sys, struct, time
