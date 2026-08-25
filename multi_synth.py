@@ -2,9 +2,16 @@
 
 # Polyphonic Python MIDI synthesizer
 
+# python multi_synth.py [MIDI channel (0-15)]
+
 import pyaudio
 import mido
-import struct, math, time
+import sys, struct, math, time
+
+try:
+    midi_channel = int(sys.argv[1])
+except:
+    midi_channel = -1
 
 # sleep time in main loop
 SLEEP = 0.01
@@ -65,6 +72,11 @@ stream = paud.open(
 
 while True:
     for msg in inport.iter_pending():
+        # check if note belongs to correct MIDI channel
+        if midi_channel > -1:
+            if msg.channel != midi_channel:
+                continue
+
         # process new note
         if msg.type == "note_on":
             if msg.velocity == 0:
